@@ -522,4 +522,46 @@ class res_company(osv.Model):
         'additional_hours': fields.integer('Additional Hours', help="Provide the min hours value for check in, checkout days, whatever the hours will be provided here based on that extra days will be calculated."),
     }
 
+# ---------- CUSTOM PARTNER FORM
+class partner_extend (osv.Model):
+    _name = "res.partner"
+    _inherit = "res.partner"
+    _columns = {
+        'dob' : fields.date('Date of Birth'),
+        'black_list': fields.selection([('clean','Clean'),('blacklist','Black LIst')],'Guest Condition'),
+        'id_number': fields.char('ID Number', size=32),
+        'id_type': fields.selection([('1','KTP'),('2','Passport'),('3','SIM A'),('4','SIM B'),('5','SIM C')],'ID Type'),
+        'nationality': fields.many2one('res.country', 'Nationality'),
+        'pinbb': fields.char('Pin BB', size=8),
+        'tour_travel': fields.boolean('Tour Travel'),
+        'wig': fields.boolean('WIG'),
+        'typeofpartner': fields.selection([('1','W I G'),('2','VVIP')],'Guest Type'),
+        'addinfo':fields.one2many('res.partner.info', 'info_id', 'Additional Info'),
+        'last_visit':fields.datetime('Last Visit'),
+        }
+    
+    _defaults = {
+        'typeofpartner': lambda *a: '1', 
+        'black_list': lambda *a: 'clean',
+    }
+                
+partner_extend()
+
+class partner_addinfo (osv.Model):
+    _name = "res.partner.info"
+    _columns = {
+        'info_id' : fields.many2one('res.partner', 'Additional Info'),
+        'name': fields.char('Description', size=32),
+        'datecreate': fields.date('Date Create', readonly=False),
+        'remark': fields.char('Remark', size=64),
+        'image':fields.binary("Image"),
+        'user': fields.many2one('res.users', 'Source', select=True, readonly=True),
+        }
+    _defaults = {
+    'datecreate': lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
+    'user': lambda obj, cr, uid, context: uid,
+    }
+                
+partner_addinfo()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

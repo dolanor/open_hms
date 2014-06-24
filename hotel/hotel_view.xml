@@ -861,5 +861,155 @@
                sequence="10"
                parent="hotel.menu_hotel_service"/>
      
+     <!-- ======================================================================
+               ADD CUSTOM FIELD INTO PARTNER FORM
+          ====================================================================== -->
+          <!-- ID Number 		-->
+	<record model="ir.ui.view" id="view_partner_form4">
+                        <field name="name">res.partner.form</field>
+                        <field name="model">res.partner</field>
+                        <field name="inherit_id" ref="base.view_partner_form" />
+                        <field name="type">form</field>
+                        <field name="arch" type="xml">
+                                <field name="function" position="before">
+                           <!--  	<field name="typeofpartner"/>  -->    	
+                                		<field name="id_type" attrs="{'invisible':[('customer','=',False)]}"></field>
+                                		<field name="id_number" attrs="{'invisible':[('customer','=',False)]}"></field>
+                                <!--  		   -->
+                                </field>
+                        </field>
+     </record>	  
+     
+      <!-- Guest Clean or Balcklist		-->
+	<record model="ir.ui.view" id="view_partner_formbl">
+                        <field name="name">res.partner.form</field>
+                        <field name="model">res.partner</field>
+                        <field name="inherit_id" ref="base.view_partner_form" />
+                        <field name="type">form</field>
+                        <field name="arch" type="xml">
+                                <field name="website" position="after"> 	
+                                		<separator string="Guest Profil"/>
+                                		<newline/>
+                                		<h1>
+                                		<field name="black_list"></field>
+                                		</h1>
+                                		<newline/>
+                                		<field name="last_visit"/>
+                                </field>
+                        </field>
+     </record>	  
+     
+     <!-- Date of Birth -->
+     		<record model="ir.ui.view" id="view_partner_form3">
+                        <field name="name">res.partner.form</field>
+                        <field name="model">res.partner</field>
+                        <field name="inherit_id" ref="base.view_partner_form" />
+                        <field name="type">form</field>
+                        <field name="arch" type="xml">
+                                <field name="email" position="after">
+                                        <field name="dob" ></field>
+                                </field>
+                        </field>
+     		</record>
+     		
+     		
+     		<!-- Tree View Address -->
+     		<record model="ir.ui.view" id="view_partner_tree5">
+                        <field name="name">res.partner.tree</field>
+                        <field name="model">res.partner</field>
+                        <field name="inherit_id" ref="base.view_partner_tree" />
+                        <field name="type">tree</field>
+                        <field name="arch" type="xml">
+                                <field name="phone" position="before">
+                                        <field name="street" ></field>
+                                        <field name="street2" string="District"></field>
+                                        <field name="city"></field>
+                                        <field name="dob"></field>
+                                        <field name="id_type" />
+                                        <field name="id_number" />
+                                        <field name="last_visit"/>
+                                        <field name="mobile" />
+                                </field>
+                        </field>
+     		</record>	
+     		
+     		<record model="ir.ui.view" id="view_partner_tree6">
+                        <field name="name">res.partner.tree</field>
+                        <field name="model">res.partner</field>
+                        <field name="inherit_id" ref="base.view_partner_tree" />
+                        <field name="type">tree</field>
+                        <field name="arch" type="xml">
+                                <field name="email" position="replace">
+                                </field>
+                        </field>
+     		</record>
+     		
+     		<!-- Required Mobile Number -->
+     			<record model="ir.ui.view" id="view_partner_form7-a">
+                        <field name="name">res.partner.form</field>
+                        <field name="model">res.partner</field>
+                        <field name="inherit_id" ref="base.view_partner_form" />
+                        <field name="type">form</field>
+                        <field name="arch" type="xml">
+                                <field name="mobile" position="replace">
+                                        <field name="mobile" required="1" ></field>
+                                </field>
+                        </field>
+     		</record>	 
+     		
+     		<!-- Pin BB -->
+     		<record model="ir.ui.view" id="view_partner_form7">
+                        <field name="name">res.partner.form</field>
+                        <field name="model">res.partner</field>
+                        <field name="inherit_id" ref="base.view_partner_form" />
+                        <field name="type">form</field>
+                        <field name="arch" type="xml">
+                                <field name="mobile" position="after">
+                                        <field name="pinbb" ></field>
+                                </field>
+                        </field>
+     		</record>	 
+     		
+  <!-- Mark on WIG at partner form -->
+     		<record model="ir.ui.view" id="view_partner_form8">
+                        <field name="name">res.partner.form</field>
+                        <field name="model">res.partner</field>
+                        <field name="inherit_id" ref="base.view_partner_form" />
+                        <field name="type">form</field>
+                        <field name="arch" type="xml">
+                                <field name="customer" position="after">
+                                        <field name="wig" ></field>
+                                </field>
+                        </field>
+     		</record>	
+     		
+     		
+     		<!-- Add Info -->
+     		<record model="ir.ui.view" id="view_partner_form9">
+                        <field name="name">res.partner.form</field>
+                        <field name="model">res.partner</field>
+                        <field name="inherit_id" ref="base.view_partner_form" />
+                        <field name="type">form</field>
+                        <field name="arch" type="xml">
+                                <field name="comment" position="before">
+                                        <field name="addinfo" nolabel="1">
+                                        <form string="Additional Info">
+                                        <field name="datecreate"/>
+                                        <field name="user"/>
+                                        <field name="name"/>
+                                        <field name="remark"/>
+                                        </form>
+                                        <tree string="Additional Info" editable="bottom">
+                                        <field name="datecreate"/>
+                                        <field name="user"/>
+                                        <field name="name"/>
+                                        <field name="remark"/>
+                                        </tree>
+                                        </field>
+                                </field>
+                        </field>
+     		</record>	
+          
+     
     </data>
 </openerp>
