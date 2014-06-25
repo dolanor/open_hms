@@ -632,6 +632,13 @@
                              <field name="checkout_date" on_change="onchange_dates(checkin_date,checkout_date)"/>
                              <field name="duration" on_change="onchange_dates(checkin_date,False,duration)"/>
                          </group>
+                       <group>
+                       			<field name="adults" on_change="on_change_person_number(adults,baby,children)"/>
+								<field name="children" on_change="on_change_person_number(adults,baby,children)"/>
+								<field name="baby" on_change="on_change_person_number(adults,baby,children)"/>
+								<field name="person_number" on_change="on_change_person_number(adults,baby,children)"/>
+								<field name="bellboy"/>
+                       </group>
                          <separator string="Room Lines" colspan="4"/>
                          <field name="room_lines"  colspan="4" string="Room Line" default_get="{'checkin_date': checkin_date,'checkout_date':checkout_date}" nolabel="1">
                              <form string="Room Line"  version="7.0">

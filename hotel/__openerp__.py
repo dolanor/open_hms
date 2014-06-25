@@ -36,7 +36,7 @@
     Different reports are also provided, mainly for hotel statistics.
     """,
     "website": ["http://www.rimeta.com"],
-    "depends" : ["sale_stock"],
+    "depends" : ["sale_stock","hr"],
     "demo" : [
     ],
     "data": [

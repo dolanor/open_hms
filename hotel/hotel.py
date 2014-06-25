@@ -150,6 +150,14 @@ class hotel_folio(osv.Model):
       'service_lines': fields.one2many('hotel.service.line', 'folio_id', readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]}, help="Hotel services detail provide to customer and it will include in main Invoice."),
       'hotel_policy': fields.selection([('prepaid', 'On Booking'), ('manual', 'On Check In'), ('picking', 'On Checkout')], 'Hotel Policy', help="Hotel policy for payment that either the guest has to payment at booking time or check-in check-out time."),
       'duration': fields.float('Duration in Days', readonly=True, help="Number of days which will automatically count from the check-in and check-out date. "),
+# persona
+#      'reception': fields.many2one('res.users', 'Reception', select=True, readonly=True),
+      'bellboy': fields.many2one('hr.employee', 'Bellboy', domain=[('bellboy', '=', True)], select=True),
+      'tour_travel': fields.many2one('res.partner', 'Tour & Travel', domain=[('tour_travel', '=', True)], select=True),
+      'adults':fields.integer('Adults',size=64,readonly=True, states={'draft':[('readonly',False)]}, help='List of adults there in guest list. '),
+      'children':fields.integer('Children',size=64,readonly=True, states={'draft':[('readonly',False)]}, help='Number of children there in guest list. '),   
+      'baby':fields.integer('Baby',size=64,readonly=True, states={'draft':[('readonly',False)]}, help='Number of baby there in guest list. '),
+      'person_number': fields.integer('Person Number', size=2, readonly=False),
     }
     _defaults = {
       'name': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'hotel.folio'),
@@ -158,7 +166,11 @@ class hotel_folio(osv.Model):
     _sql_constraints = [
         ('check_in_out', 'CHECK (checkin_date<=checkout_date)', 'Check in Date Should be less than the Check Out Date!'),
     ]
-
+    
+    def on_change_person_number(self,cr,uid,ids,adults,children,baby):
+        v = {'person_number': adults + children + baby}
+        return {'value': v}
+    
     def _check_room_vacant(self, cr, uid, ids, context=None):
         folio = self.browse(cr, uid, ids[0], context=context)
         rooms = [] 
@@ -563,5 +575,14 @@ class partner_addinfo (osv.Model):
     }
                 
 partner_addinfo()
+
+class hr_hotel_extend (osv.Model):
+    _name = "hr.employee"
+    _inherit = "hr.employee"
+    _columns = {
+        'bellboy' : fields.boolean('Bellboy'),
+        }
+                
+hr_hotel_extend()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
