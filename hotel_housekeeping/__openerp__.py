@@ -23,16 +23,18 @@
 {
     "name" : "Hotel Housekeeping Management",
     "version" : "0.05",
-    "author": ["Riza and Friend" ],
+    "author": "Riza and Friend",
     "category" : "Generic Modules/Hotel Housekeeping",
     "description": """
-    Module for Hotel/Hotel Housekeeping. You can manage:
+    Module for Hotel/Hotel Housekeeping (Maintenance dept - it will be standalone). You can manage:
     * Housekeeping process
     * Housekeeping history room wise
+    * Issue Material - Maintenance dept
+    * Replacement Request - Maintenance dept
 
       Different reports are also provided, mainly for hotel statistics.
     """,
-    "website": ["http://www.rimeta.com"],
+    "website": "http://www.rimeta.com",
     "depends" : ["hotel"],
     "demo" : ["hotel_housekeeping_data.xml",
     ],
