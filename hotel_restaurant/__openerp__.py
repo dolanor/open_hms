@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    #    Copyright (C) 2014 - Today Riza and Friend
+#    Copyright (C) 2014 - Today Riza and Friend
 #    Copyright (C) 2004 OpenERP SA (<http://www.openerp.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,12 +21,12 @@
 ##############################################################################
 
 {
-    "name" : "Hotel Restaurant Management",
+    "name" : "Hotel Food and Beverage",
     "version" : "0.05",
-    "author": ["Riza and Friend" ],
-    "category" : "Generic Modules/Hotel Restaurant",
+    "author": "Riza and Friend",
+    "category" : "Generic Modules/Hotel F&B",
     "description": """
-    Module for Hotel/Resort/Restaurant management. You can manage:
+    Module for Hotel/Resort/F&B management. You can manage:
     * Configure Property
     * Restaurant Configuration
     * table reservation
