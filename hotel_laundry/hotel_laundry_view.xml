@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+	<!--view creation for hotel loundry, which will come in configuration part-->
+		<record model="ir.ui.view" id="hotel_laundry_form_view">
+			<field name="name">hotel.laundry.form</field>
+			<field name="model">hotel.laundry</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Hotel Laundry" version="7.0">
+				    <sheet>
+					<header>
+						<button name="confirm" string="Confirm" states="draft,edit" type="object" groups="hotel_laundry.group_laundry_manager"/>
+						<button name="update_record" string="Update" states="confirmed" type="object" groups="hotel_laundry.group_laundry_manager"/>
+						<button name="cancel_supplier" string="Cancel" states="edit,confirmed" type="object" groups="hotel_laundry.group_laundry_manager"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+					</header>
+					<group colspan="4">
+						<field name="partner_id" on_change="onchange_partner_id1(partner_id)"/>
+						<!--<field name="partner_address_id"/>-->
+						<field name="name" invisible="1"/>
+						<separator colspan="4" string="Lanundry Service Info"/>
+						<notebook colspan="4">
+                        <page string="Hotel Laundry Service">
+							<group colspan="4">
+								<field name="laundry_service_ids" nolabel="1">
+									<form string="Hotel Laundry Service">
+										<group colspan="4">
+											<field name="name" invisible="1"/>
+											<field name="supplier_id" invisible="1"/>
+											<field name="laundry_services_id" domain="[('type','=','service'),('categ_id','=',category_id)]" on_change="onchange_services_id(laundry_services_id)"/>
+											<field name="category_id" invisible="True"/>
+											<separator colspan="4" string="Lanundry Service Items Info"/>
+											<notebook colspan="4">
+                        					<page string="Laundry Service Items">
+												<group colspan="4">
+													<field name="laundry_services_items_ids" nolabel="1">
+														<form string="Laundry Service Items">
+															<group colspan="4">
+																<field name="name" invisible="1"/>
+																<field name="item_id" domain="[('type','!=','service'),('categ_id','=',category_id1)]" on_change="onchange_item_id(item_id)"/>
+																<field name="cost_price"/>	
+																<field name="sale_price"/>
+																<field name="category_id1" invisible="True"/>
+															</group>
+														</form>
+														<tree string="Laundry Service Items">
+															<field name="item_id"/>
+															<field name="cost_price"/>	
+															<field name="sale_price"/>
+														</tree>
+													</field>
+												</group>
+											</page>
+											</notebook>
+										</group>
+									</form>
+									<tree string="Hotel Lanudry Service">
+										<field name="laundry_services_id"/>
+									</tree>
+								</field>
+							</group>
+						</page>
+						</notebook>
+					</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		
+		<record model="ir.ui.view" id="hotel_laundry_tree_view">
+			<field name="name">hotel.laundry.tree</field>
+			<field name="model">hotel.laundry</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Hotel Laundry">
+					<field name="partner_id"/>
+					<!--<field name="partner_address_id"/>-->
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record model="ir.actions.act_window" id="hotel_laundry_view">
+			<field name="name">Hotel Laundry</field>
+			<field name="res_model">hotel.laundry</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		
+		
+		<menuitem name="Laundry Service" 
+				  id="laundry_service_submenu" 
+				  action="hotel_laundry_view"
+				  parent="hotel.hotel_configuration_menu"/>
+		
+		<!-- View creation for laundry management which will show main menu to manage service product -->				  
+			
+		<record model="ir.ui.view" id="laundry_management_form_view1">
+			<field name="name">laundry.management.form.view1</field>
+			<field name="model">laundry.management</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Laundry Service Configuration" version="7.0">
+				   
+						<header>
+							<button name="confirm" string="Confirm" states="draft" type="object" icon="gtk-apply"/>
+							<button name="cancel_service" string="Cancel" states="draft" type="object" icon="gtk-cancel"/>
+							<button name="send_to_laundry" string="Send to Laundry" states="confirmed" type="object"/>
+							<button name="%(hotel_laundry_picking_action_form)d" string="Laundry Return" states="sent_to_laundry" type="action" icon="gtk-execute" context="{'laundry_flag': True}"/>
+	
+							<!-- <button name="customer_return" string="Customer Return" states="laundry_returned" type="object"  attrs="{'invisible': [('request_type','!=','from_room')]}"/> -->
+							<button name="customer_return" string="Customer Return" type="object"  attrs="{'invisible': ['|',('request_type','!=','from_room'),('state','!=','laundry_returned')]}"/>
+							<!-- <button name="done_internal" string="Done" states="laundry_returned" type="object" attrs="{'invisible': [('request_type','!=','internal'),('state','!=','laundry_returned')]}" /> -->
+							<button name="done_internal" string="Done" type="object" attrs="{'invisible': ['|',('request_type','!=','internal'),('state','!=','laundry_returned')]}" />
+	
+							<!--['draft','done','confirmed','customer_returned','canceled']-->
+							<!--<group attrs="{'invisible': [('request_type','=','internal')]}">
+								<button name="customer_return" string="Customer Return" states="laundry_returned" type="object"/> 
+							</group>
+							<group attrs="{'invisible': [('request_type','=','from_room')]}">
+								<button name="done_internal" string="Done" states="laundry_returned" type="object"/>
+							</group>-->
+							<button name="done_from_room" string="Done" states="customer_returned" type="object"/>
+							<field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/>
+						</header>
+						 <sheet>
+						<group colspan="4" col="4">
+							<field name="name"/>
+							<field name="user_id"/>
+							<field name="date_order" on_change="get_rooms(request_type,date_order)"/>
+							<field name="deadline_date"/>
+							<!-- <field name="warehouse_id"/> -->
+							<field name="shop_id" on_change="on_change_shop_id(shop_id)"/>
+							<field name="company_id"/>
+							<field name="pricelist_id" on_change="onchange_pricelist_id(pricelist_id,laundry_service_product_ids)" domain="[('type','=','sale')]"/> 
+						</group>
+						<newline/>
+						<separator colspan="4" string="Room Info"/>
+						<group colspan="4" col="4">
+							<field name="request_type" on_change="get_rooms(request_type,date_order)"/>
+							<field name="service_type"></field>
+							<field name="is_chargable"></field>
+							<label string=" " colspan="2"/>
+							<field name="room_number" attrs="{'invisible': [('request_type','!=','from_room')]}"
+							domain="[('state','=','sellable')]" 
+							on_change="onchange_room_no(room_number,date_order)" 
+							select="1"/>
+							<!-- <field name="room_number_selection" attrs="{'invisible': [('request_type','!=','from_room')]}"
+							on_change="onchange_room_no(room_number_selection,date_order)" 
+							select="1"/> -->
+							<field name="partner_id"  attrs="{'invisible': [('request_type','!=','from_room')]}"/>
+						</group>
+						<newline/>
+						<separator colspan="4" string="Supplier Info"/>
+						<group colspan="4" col="4">
+							<field name="supplier_id" on_change="onchange_partner_id(supplier_id)"/>
+							<label string=" " colspan="2"/>
+							<!--<field name="supplier_address_id"/>-->
+							<field name="supplier_id_temp" invisible="1"/>
+						</group>
+						<group colspan="4">
+							<separator colspan="4" string="Laundry Service Product Info"/>
+							<notebook colspan="4">
+	                        	<page string="Laundry Service Product">
+									<group colspan="4">
+										<field name="laundry_service_product_ids" nolabel="1">
+											<form string="Laundry Service Product">
+												<group colspan="4">
+													<field name="laundry_services_id" domain="[('supplier_id','=',parent.supplier_id_temp)]" on_change="on_change_service_ids(parent.pricelist_id,parent.supplier_id_temp)"/>
+													<newline/>
+													<!-- <field name="product_uom_qty" on_change="onchange_quantity(product_uom_qty,cost_rate,sales_rate)" invisible="1"/> -->
+													<!-- <field name="currency_id"/> -->
+													<field name="pricelist_id" invisible="1"/>
+													<field name="cost_rate"/>
+													<field name="sales_rate"/>
+													<field name="cost_subtotal"/>
+													<field name="sale_subtotal"/>
+													<field name="supplier_id" invisible="1"/>
+													<newline/>
+													<separator colspan="4" string="Service Product Line Info"/>
+													<group colspan="4">
+														<field name="laundry_service_product_line_ids" nolabel="1"/>
+													</group>
+												</group>
+											</form>
+											<tree string="Laundry Service Product">
+												<field name="laundry_services_id"/>
+												<!-- <field name="product_uom_qty"/> -->
+												<!-- <field name="currency_id"/> -->
+												<field name="cost_rate"/>
+												<field name="sales_rate"/>
+												<field name="cost_subtotal" sum="Total Of Cost Subtotals"/>
+												<field name="sale_subtotal" sum="Total Of Sale Subtotals"/>
+											</tree>
+										</field>
+									</group>
+								</page>
+								<page string="Picking Info">
+	                            <separator colspan="4" string="Picking"/>
+	                                 <field colspan="4" name="invoice_ids" nolabel="1" widget="many2many"/>
+	                        	</page>
+							</notebook>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="laundry_management_tree_view1">
+			<field name="name">laundry.management.tree.view</field>
+			<field name="model">laundry.management</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Laundry Service Configuration">
+					<field name="name"/>
+					<field name="user_id"/>
+					<field name="date_order"/>
+					<field name="deadline_date"/>
+					<field name="request_type"/>
+					<field name="room_number"/>
+					<field name="partner_id"/>
+					<field name="supplier_id"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="laundry_management_view">
+			<field name="name">Laundry Service Configuration</field>
+			<field name="res_model">laundry.management</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		
+		<menuitem name="Laundry Management" sequence="75"
+				  id="laundry_management_menu" 
+				  parent="hotel.hotel_management_menu"/>
+		<menuitem name="Laundry Service Request" 
+				  id="laundry_service_request" 
+				  action="laundry_management_view"
+				  parent="laundry_management_menu"/>
+				  
+		<record model="ir.ui.view" id="laundry_service_product_line_form_view">
+			<field name="name">laundry.service.product.line.form.view</field>
+			<field name="model">laundry.service.product.line</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="laundry Service Product Line" version="7.0">
+				    <sheet>
+						<group colspan="4">
+							<field name="item_id" invisible="1"/>
+							<field name="item_id_ref" domain="[('laundry_items_id','=',parent.laundry_services_id)]" on_change="onchange_itemid(item_id_ref,parent.pricelist_id,parent.supplier_id)"/>
+							<field name="qty" on_change="onchange_quantity(qty,cost_price,sales_price)"/>
+							<field name="qty_uom"/>
+							<field name="cost_price"/>
+							<field name="sales_price"/>
+							<field name="cost_subtotal"/>
+							<field name="sale_subtotal"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>			
+		
+		<record model="ir.ui.view" id="laundry_service_product_line_tree_view">
+			<field name="name">laundry.service.product.line.tree.view</field>
+			<field name="model">laundry.service.product.line</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="laundry Service Product Line">
+						<field name="item_id_ref"/> 
+						<field name="qty"/>
+						<field name="qty_uom"/>
+						<field name="cost_price"/>
+						<field name="sales_price"/>
+						<field name="cost_subtotal" sum="Total Of Cost Subtotal"/>
+						<field name="sale_subtotal" sum="Total Of Sale Subtotal"/>
+				</tree>
+			</field>
+		</record>	  				 
+				  
+	</data>
+</openerp>

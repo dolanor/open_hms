@@ -1,0 +1,593 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* hotel_laundry
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0-20130412-232402\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-06-11 21:56+0000\n"
+"PO-Revision-Date: 2013-06-11 21:56+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hotel_laundry
+#: view:laundry.service.product.line:0
+msgid "laundry Service Product Line"
+msgstr "Ligne de Produit Buanderie"
+
+#. module: hotel_laundry
+#: field:laundry.management,supplier_id_temp:0
+msgid "Supplier Temp Id"
+msgstr "ID Fournisseur"
+
+#. module: hotel_laundry
+#: field:laundry.management,supplier_id:0
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: hotel_laundry
+#: field:laundry.service.product,sales_rate:0
+msgid "Sales Rate"
+msgstr "Taux Ventes"
+
+#. module: hotel_laundry
+#: view:hotel.laundry.picking:0
+msgid "Return lines"
+msgstr "Lignes Retour"
+
+#. module: hotel_laundry
+#: view:hotel.laundry.picking.memory:0
+msgid "Product Moves"
+msgstr "Deplace"
+
+#. module: hotel_laundry
+#: selection:laundry.management,state:0
+msgid "Customer Returned"
+msgstr "Retour Client"
+
+#. module: hotel_laundry
+#: field:laundry.management,company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: hotel_laundry
+#: view:hotel.laundry:0
+msgid "Update"
+msgstr "Mise à jour"
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+msgid "Total Of Sale Subtotals"
+msgstr "Total Coût"
+
+#. module: hotel_laundry
+#: model:product.category,name:hotel_laundry.cat3333
+msgid "Clothes"
+msgstr "Vêtements"
+
+#. module: hotel_laundry
+#: field:hotel.laundry,laundry_service_ids:0
+#: model:product.template,name:hotel_laundry.laundry_services_product_template
+msgid "Laundry Services"
+msgstr "Buanderie"
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+msgid "Send to Laundry"
+msgstr "Buanderie"
+
+#. module: hotel_laundry
+#: model:ir.ui.menu,name:hotel_laundry.laundry_service_request
+msgid "Laundry Service Request"
+msgstr "Demande Buanderie"
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+msgid "Picking Info"
+msgstr "Info Ramassage"
+
+#. module: hotel_laundry
+#: selection:laundry.management,state:0
+msgid "Laundry Returned"
+msgstr "Retour Buanderie"
+
+#. module: hotel_laundry
+#: field:laundry.service.product,supplier_id:0
+msgid "supplier"
+msgstr "Fournisseur"
+
+#. module: hotel_laundry
+#: code:addons/hotel_laundry/hotel_laundry.py:838
+#: code:addons/hotel_laundry/wizard/hotel_laundry_picking.py:89
+#: code:addons/hotel_laundry/wizard/hotel_laundry_picking.py:177
+#, python-format
+msgid "Warning !"
+msgstr "Avertissement ! "
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+msgid "Customer Return"
+msgstr "Retour Client"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.picking.memory,move_id:0
+msgid "Move"
+msgstr "Déplacer"
+
+#. module: hotel_laundry
+#: selection:hotel.laundry.picking,invoice_state:0
+msgid "To be refunded/invoiced"
+msgstr "Remboursement / Facture"
+
+#. module: hotel_laundry
+#: view:hotel.laundry.picking:0
+msgid "_Cancel"
+msgstr "_Cancel"
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+msgid "Total Of Cost Subtotals"
+msgstr "Total Coût"
+
+#. module: hotel_laundry
+#: selection:hotel.laundry.picking,invoice_state:0
+msgid "No invoicing"
+msgstr "Pas de Facturation"
+
+#. module: hotel_laundry
+#: selection:hotel.laundry,state:0
+#: selection:laundry.management,state:0
+msgid "Confirmed"
+msgstr "Confirmé"
+
+#. module: hotel_laundry
+#: view:hotel.laundry:0
+#: view:laundry.management:0
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: hotel_laundry
+#: field:hotel.laundry,state:0
+#: field:laundry.management,state:0
+msgid "State"
+msgstr "Etat"
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+msgid "Supplier Info"
+msgstr "Info fournisseur"
+
+#. module: hotel_laundry
+#: field:laundry.service.product,cost_subtotal:0
+#: field:laundry.service.product.line,cost_subtotal:0
+msgid "Cost Sub Total"
+msgstr "Sous total revient"
+
+#. module: hotel_laundry
+#: field:laundry.service.product.line,qty_uom:0
+msgid "UOM"
+msgstr "UOM"
+
+#. module: hotel_laundry
+#: model:ir.model,name:hotel_laundry.model_hotel_laundry_services_items
+msgid "Laundry services Items Details"
+msgstr "Détails Elements Buanderie"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.services,laundry_services_items_ids:0
+msgid "laundry service items"
+msgstr "Articles Buanderie"
+
+#. module: hotel_laundry
+#: selection:laundry.management,request_type:0
+msgid "From Room"
+msgstr "De Chambre"
+
+#. module: hotel_laundry
+#: help:laundry.management,shop_id:0
+msgid "Will show list of shop that belongs to allowed companies of logged-in user."
+msgstr "Affichera la liste des boutiques  de l'utilisateur connecté."
+
+#. module: hotel_laundry
+#: field:laundry.management,room_number:0
+msgid "Room No"
+msgstr "Numéro chambre"
+
+#. module: hotel_laundry
+#: view:hotel.laundry:0
+msgid "Hotel Lanudry Service"
+msgstr "Service de Buanderie"
+
+#. module: hotel_laundry
+#: help:laundry.service.product,sales_rate:0
+#: help:laundry.service.product.line,sales_price:0
+msgid "This column will compute cost price based on the pricelist selected at header part"
+msgstr "Le calcul de Coût de cette colonne est basée sur le fournisseur sélectionné"
+
+#. module: hotel_laundry
+#: field:laundry.management,name:0
+msgid "Order Reference"
+msgstr "Référence Commande"
+
+#. module: hotel_laundry
+#: field:laundry.management,pricelist_id:0
+#: field:laundry.service.product,pricelist_id:0
+msgid "Pricelist"
+msgstr "Tarifs"
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+msgid "Room Info"
+msgstr "Info Chambre"
+
+#. module: hotel_laundry
+#: code:addons/hotel_laundry/hotel_laundry.py:287
+#: code:addons/hotel_laundry/hotel_laundry.py:577
+#, python-format
+msgid "Incoming picking id '%s' has been created."
+msgstr "ID ramassage entrant '%s' a été crée"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.services.items,item_id:0
+#: field:laundry.service.product.line,item_id_ref:0
+msgid "Items"
+msgstr "Articles"
+
+#. module: hotel_laundry
+#: model:product.template,name:hotel_laundry.laundry_services2_product_template
+msgid "All Clothes"
+msgstr "Tous les vêtements"
+
+#. module: hotel_laundry
+#: code:addons/hotel_laundry/hotel_laundry.py:205
+#, python-format
+msgid "Pricelist Warning!"
+msgstr "Avertissement tarifs"
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+msgid "Service Product Line Info"
+msgstr "Info"
+
+#. module: hotel_laundry
+#: model:res.groups,name:hotel_laundry.group_laundry_manager
+msgid "Hotel Management/ Laundry Manager"
+msgstr "Gestion Hôtel / Manager Buanderie"
+
+#. module: hotel_laundry
+#: view:hotel.laundry:0
+msgid "Lanundry Service Items Info"
+msgstr "Info Articles Buanderie"
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+msgid "Laundry Service Product Info"
+msgstr "Info Produit Buanderie"
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+msgid "Laundry Return"
+msgstr "Retour Buanderie"
+
+#. module: hotel_laundry
+#: field:laundry.service.product.line,sale_subtotal:0
+msgid "Sale Sub Total"
+msgstr "Sous total Vente"
+
+#. module: hotel_laundry
+#: selection:laundry.management,state:0
+msgid "Canceled"
+msgstr "Annulé"
+
+#. module: hotel_laundry
+#: view:laundry.service.product.line:0
+msgid "Total Of Sale Subtotal"
+msgstr "Total Coût"
+
+#. module: hotel_laundry
+#: field:laundry.management,shop_id:0
+msgid "Shop Name"
+msgstr "Nom Boutique"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.services,category_id:0
+#: field:hotel.laundry.services.items,category_id1:0
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: hotel_laundry
+#: model:ir.model,name:hotel_laundry.model_hotel_laundry_picking_memory
+msgid "Hotel Laundry Picking Memory"
+msgstr "Ramassage"
+
+#. module: hotel_laundry
+#: model:ir.model,name:hotel_laundry.model_laundry_service_product
+#: view:laundry.management:0
+#: field:laundry.management,laundry_service_product_ids:0
+msgid "Laundry Service Product"
+msgstr "Produit Buanderie"
+
+#. module: hotel_laundry
+#: view:hotel.laundry:0
+msgid "Laundry Service Items"
+msgstr "Articles Buanderie"
+
+#. module: hotel_laundry
+#: field:laundry.service.product.line,sales_price:0
+msgid "Sales Price"
+msgstr "Prix de ventes"
+
+#. module: hotel_laundry
+#: selection:laundry.management,request_type:0
+msgid "Internal"
+msgstr "Interne"
+
+#. module: hotel_laundry
+#: selection:hotel.laundry,state:0
+#: selection:laundry.management,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.services,laundry_services_id:0
+#: field:laundry.service.product,laundry_services_id:0
+msgid "Service Name"
+msgstr "Nom Service"
+
+#. module: hotel_laundry
+#: view:hotel.laundry:0
+msgid "Hotel Laundry Service"
+msgstr "Service de Buanderie"
+
+#. module: hotel_laundry
+#: view:laundry.service.product.line:0
+msgid "Total Of Cost Subtotal"
+msgstr "Total Coût"
+
+#. module: hotel_laundry
+#: help:laundry.management,room_number:0
+msgid "Will show list of currently occupied room no that belongs to selected shop."
+msgstr "Affichera la liste des chambres occupées actuellement."
+
+#. module: hotel_laundry
+#: code:addons/hotel_laundry/wizard/hotel_laundry_picking.py:177
+#, python-format
+msgid "Please specify at least one non-zero quantity!"
+msgstr "Veuillez saisir une quantité non nulle !"
+
+#. module: hotel_laundry
+#: model:ir.model,name:hotel_laundry.model_laundry_management
+#: model:ir.ui.menu,name:hotel_laundry.laundry_management_menu
+msgid "Laundry Management"
+msgstr "Gestion Buanderie"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.services,hotel_laundry_service_id:0
+#: field:hotel.laundry.services.items,laundry_items_id:0
+#: field:laundry.service.product,laundry_service_id:0
+#: field:laundry.service.product.line,laundry_service_line_id:0
+msgid "unknown"
+msgstr "inconnu"
+
+#. module: hotel_laundry
+#: field:laundry.management,partner_id:0
+msgid "Guest Name"
+msgstr "Nom Client"
+
+#. module: hotel_laundry
+#: view:hotel.laundry:0
+#: model:ir.actions.act_window,name:hotel_laundry.hotel_laundry_view
+#: model:ir.model,name:hotel_laundry.model_hotel_laundry
+msgid "Hotel Laundry"
+msgstr "Buanderie"
+
+#. module: hotel_laundry
+#: field:laundry.service.product,cost_rate:0
+msgid "Cost Rate"
+msgstr "Taux"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.services.items,cost_price:0
+#: field:laundry.service.product.line,cost_price:0
+msgid "Cost Price"
+msgstr "Prix de revient"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.picking.memory,wizard_id:0
+msgid "Wizard"
+msgstr "Assistant"
+
+#. module: hotel_laundry
+#: view:hotel.laundry.picking.memory:0
+#: model:ir.ui.menu,name:hotel_laundry.laundry_service_submenu
+msgid "Laundry Service"
+msgstr "Buanderie"
+
+#. module: hotel_laundry
+#: field:laundry.management,date_order:0
+msgid "Request Date"
+msgstr "Date Demande"
+
+#. module: hotel_laundry
+#: model:res.groups,name:hotel_laundry.group_laundry_user
+msgid "Hotel Management / Laundry User"
+msgstr "Gestion Hôtel / Employé Buanderie"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.picking.memory,quantity:0
+#: field:laundry.service.product.line,qty:0
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: hotel_laundry
+#: field:laundry.management,request_type:0
+msgid "Request Type"
+msgstr "Type Demande"
+
+#. module: hotel_laundry
+#: help:laundry.service.product,cost_rate:0
+#: help:laundry.service.product.line,cost_price:0
+msgid "This column will compute cost price based on the pricelist linked to selected supplier"
+msgstr "Le calcul de coût de cette colonne est basée sur le fournisseur sélectionné"
+
+#. module: hotel_laundry
+#: code:addons/hotel_laundry/hotel_laundry.py:206
+#, python-format
+msgid "If you change the pricelist of this order (and eventually the currency), prices of existing order lines will not be updated."
+msgstr "Si vous changez le tarif de cette commande(eventuellement la devise), les prix des commandes existantes ne seront pas miseé jour."
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+#: selection:laundry.management,state:0
+msgid "Done"
+msgstr "Effectué"
+
+#. module: hotel_laundry
+#: selection:laundry.management,state:0
+msgid "Sent to Laundry"
+msgstr "Buanderie"
+
+#. module: hotel_laundry
+#: view:hotel.laundry:0
+#: selection:hotel.laundry,state:0
+#: view:laundry.management:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: hotel_laundry
+#: model:ir.actions.act_window,name:hotel_laundry.hotel_laundry_picking_action_form
+#: model:ir.model,name:hotel_laundry.model_hotel_laundry_picking
+msgid "Return Picking"
+msgstr "Retour Ramassage"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.picking,product_return_moves:0
+msgid "Moves"
+msgstr "Mouvements"
+
+#. module: hotel_laundry
+#: model:ir.model,name:hotel_laundry.model_laundry_service_product_line
+msgid "Product Line show all items details"
+msgstr "Ligne Produit montre tous les détails d'Articles"
+
+#. module: hotel_laundry
+#: view:hotel.laundry.picking:0
+msgid "Provide the quantities of the returned products."
+msgstr "Fournir les quantités des produits retournés."
+
+#. module: hotel_laundry
+#: field:laundry.management,user_id:0
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: hotel_laundry
+#: model:ir.actions.act_window,name:hotel_laundry.laundry_management_view
+#: view:laundry.management:0
+msgid "Laundry Service Configuration"
+msgstr "Configuration Buanderie"
+
+#. module: hotel_laundry
+#: field:hotel.laundry,partner_id:0
+msgid "Supplier Name"
+msgstr "Nom fournisseur"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.picking.memory,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: hotel_laundry
+#: view:hotel.laundry.picking:0
+msgid "Return"
+msgstr "Retourner"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.picking,invoice_state:0
+msgid "Invoicing"
+msgstr "Facturation"
+
+#. module: hotel_laundry
+#: field:laundry.management,invoice_ids:0
+msgid "Invoice Lines"
+msgstr "Lignes de facture"
+
+#. module: hotel_laundry
+#: view:laundry.management:0
+msgid "Picking"
+msgstr "Ramassage"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.services,supplier_id:0
+msgid "Supplier Id"
+msgstr "Numéro fournisseur"
+
+#. module: hotel_laundry
+#: field:hotel.laundry,name:0
+#: field:hotel.laundry.services,name:0
+#: field:hotel.laundry.services.items,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: hotel_laundry
+#: selection:hotel.laundry,state:0
+msgid "Edit"
+msgstr "Editer"
+
+#. module: hotel_laundry
+#: model:ir.model,name:hotel_laundry.model_hotel_laundry_services
+msgid "Laundry services in hotel"
+msgstr "Buanderie dans l'hotel"
+
+#. module: hotel_laundry
+#: view:hotel.laundry:0
+msgid "Lanundry Service Info"
+msgstr "Info Buanderie"
+
+#. module: hotel_laundry
+#: field:laundry.service.product.line,item_id:0
+msgid "Item"
+msgstr "Article"
+
+#. module: hotel_laundry
+#: model:product.category,name:hotel_laundry.laundry_category
+msgid "Laundry"
+msgstr "Buanderie"
+
+#. module: hotel_laundry
+#: field:laundry.management,deadline_date:0
+msgid "Request Deadline"
+msgstr "Date fin Demande"
+
+#. module: hotel_laundry
+#: code:addons/hotel_laundry/hotel_laundry.py:405
+#: code:addons/hotel_laundry/hotel_laundry.py:449
+#, python-format
+msgid "Outgoing picking id '%s' has been created."
+msgstr "ID ramassage sortant '%s' a été créée"
+
+#. module: hotel_laundry
+#: field:laundry.service.product,sale_subtotal:0
+msgid "Sales Sub Total"
+msgstr "Sous total Ventes"
+
+#. module: hotel_laundry
+#: field:hotel.laundry.services.items,sale_price:0
+msgid "Sale Price"
+msgstr "Prix de vente"
+
+#. module: hotel_laundry
+#: code:addons/hotel_laundry/wizard/hotel_laundry_picking.py:89
+#, python-format
+msgid "Please process the delivery order shipment-%s first!"
+msgstr "Veuillez traiter la livraison pour les expéditions '% s' en premier!"
+
+#. module: hotel_laundry
+#: field:laundry.service.product,laundry_service_product_line_ids:0
+msgid "Laundry Product Service Line"
+msgstr "Ligne de Produit de Buanderie"
+
