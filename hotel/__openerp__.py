@@ -23,7 +23,7 @@
 {
     "name" : "Hotel Management",
     "version" : "0.07",
-    "author": ["Riza and Friend" ],
+    "author": "Riza and Friend",
     "category" : "Generic Modules/Hotel Management",
     "description": """
     Module for Hotel/Resort/Property management. You can manage:
@@ -35,7 +35,7 @@
 
     Different reports are also provided, mainly for hotel statistics.
     """,
-    "website": ["http://www.rimeta.com"],
+    "website": "http://www.rimeta.com",
     "depends" : ["sale_stock","hr"],
     "demo" : [
     ],
