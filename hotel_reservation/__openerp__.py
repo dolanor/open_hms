@@ -23,7 +23,7 @@
 {
     "name" : "Hotel Reservation Management",
     "version" : "0.07",
-    "author": ["Riza and Friend" ],
+    "author": "Riza and Friend",
     "category" : "Generic Modules/Hotel Reservation",
     "description": """
     Module for Hotel/Resort/Property management. You can manage:
@@ -31,16 +31,21 @@
     * Group Reservartion
       Different reports are also provided, mainly for hotel statistics.
     """,
-    "website": ["http://www.rimeta.com"],
+    "website": "http://www.rimeta.com",
     "depends" : ["hotel"],
     "data" : [
         "security/ir.model.access.csv",
         "wizard/hotel_reservation_wizard.xml",
+        "wizard/folio_cancel_wizard_view.xml",
+        "wizard/issue_material_view.xml",
         "report/hotel_reservation_report.xml",
         "hotel_reservation_sequence.xml",
         "hotel_reservation_workflow.xml",
         "hotel_reservation_view.xml",
         "hotel_scheduler.xml",
+        "hotel_housekeeping_view.xml",
+        "hotel_housekeeping_data.xml",
+        "hotel_houskeeping_sequence.xml",
     ],
     "demo": [
         'hotel_reservation_data.xml',

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- Sequences for hotel.housekeeping -->
+        <record id="seq_type_hotel_housekeeping111" model="ir.sequence.type">
+            <field name="name">Hotel Housekeeping Ref</field>
+            <field name="code">hotel.housekeeping1</field>
+        </record>
+
+        <record id="seq_hotel_housekeeping111" model="ir.sequence">
+            <field name="name">Hotel Housekeeping Ref</field>
+            <field name="code">hotel.housekeeping1</field>
+            <field name="prefix">HK</field>
+            <field name="padding">5</field>
+			<field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Sequences for rr_housekeeping Repair -->
+        <record id="seq_type_rr_housekeeping_repair111" model="ir.sequence.type">
+            <field name="name">rr housekeeping Repair</field>
+            <field name="code">rr.housekeeping.repair</field>
+        </record>
+
+        <record id="seq_rr_housekeeping_repair111" model="ir.sequence">
+            <field name="name">rr housekeeping Repair</field>
+            <field name="code">rr.housekeeping.repair</field>
+            <field name="prefix">RPR</field>
+            <field name="padding">5</field>
+			<field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Sequences for rr_housekeeping Replace -->
+        <record id="seq_type_rr_housekeeping_replace1" model="ir.sequence.type">
+            <field name="name">rr housekeeping Replace</field>
+            <field name="code">rr.housekeeping.replace</field>
+        </record>
+
+        <record id="seq_rr_housekeeping_replace1" model="ir.sequence">
+            <field name="name">rr housekeeping Repalace</field>
+            <field name="code">rr.housekeeping.replace</field>
+            <field name="prefix">RPC</field>
+            <field name="padding">5</field>
+			<field name="company_id" eval="False"/>
+        </record>
+		
+
+    </data>
+</openerp>

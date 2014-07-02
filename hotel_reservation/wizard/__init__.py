@@ -20,5 +20,7 @@
 #
 ##############################################################################
 from . import hotel_reservation_wizard
+from . import issue_material
+from . import folio_cancel_wizard
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

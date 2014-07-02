@@ -168,6 +168,45 @@ class hotel_reservation(osv.Model):
             self.write(cr, uid, ids, {'state': 'done'}, context=context)
         return True
 
+# Room History, I hope it usefull
+class hotel_room(osv.osv):
+    _inherit = "hotel.room"
+    _decritpion = "room Inherit "
+    
+    _columns = {
+        
+        "room_folio_ids":fields.one2many("hotel.room.booking.history","history_id","Room Rental History"),
+#        'shop_id':fields.many2one('sale.shop', 'Shop',required=True),
+    }
+    
+    
+    def on_change_shop_id(self,cr, uid, ids, shop_id, context=None):
+        if not shop_id:
+            return {'value':{}}
+        temp=self.pool.get('sale.shop').browse(cr,uid,shop_id,context)
+        return {'value':{'company_id':temp.company_id.id}}
+    
+hotel_room()
+
+class hotel_room_booking_history(osv.osv):
+    _name = "hotel.room.booking.history"
+    _decritpion = "Hotel Room Booking History"
+    
+    _columns = {
+        "history_id":fields.many2one("hotel.room","Room No", readonly=True),
+        "name":fields.char('Product Name', size=128, readonly=True, required=True),
+        "category_id":fields.many2one("product.category","room category", readonly=True),
+        'check_in':fields.datetime('CheckIn Date',readonly=True),
+        'check_out':fields.datetime('CheckOut Date',readonly=True),
+        'check_in_date':fields.date('CheckIn Date',readonly=True),
+        'check_out_date':fields.date('CheckOut Date',readonly=True),
+        'partner_id':fields.many2one('res.partner',"Partner Name",readonly=True),
+        'booking_id':fields.many2one('hotel.reservation',"Booking Ref",readonly=True),
+        'state': fields.selection([('draft', 'Draft'),('confirm','Confirm'),('cancle','Cancel'),('done','Done')], 'State',readonly=True),
+    }
+hotel_room_booking_history()
+# End of Room History
+
 class hotel_reservation_line(osv.Model):
     _name = "hotel_reservation.line"
     _description = "Reservation Line"

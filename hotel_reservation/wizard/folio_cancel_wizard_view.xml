@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+
+<openerp>
+    <data>
+		<!--Hotel wizard form view  -->
+		<record model="ir.ui.view" id="cancel_foilo_wizard_form_view">
+			<field name="name">cancel.foilo.wizard.form</field>
+			<field name="model">cancel.foilo.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form col="3" string="Confirm">
+					<group colspan="2" col="2" fill="0" height="500">
+                        <separator string="Confirm" colspan="2"/>
+						<field name= "desc" nolabel="1"/>
+                        <separator colspan="2"/>
+                        <group colspan="2">
+                            <button special="cancel" icon="gtk-cancel" string="No"/>
+                            <button type="object" name="cancel_wizard" icon="gtk-go-forward" string="Yes"/>
+                        </group>
+                    </group>
+				</form>
+			</field>
+		</record>
+
+            
+    <record id="action_cancel_on_datecheck" model="ir.actions.act_window">
+            <field name="name">cancel folio</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cancel.foilo.wizard</field>
+			<field name="src_model">hotel.folio</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="target">new</field>
+        </record>
+        
+	<!--<act_window name="Room Availability"
+            res_model="room.avibility.wizard"
+            src_model="hotel.reservation"
+            key2="client_action_multi"
+            multi="True"
+            view_mode="form"
+            view_type="form"
+            target="new"
+            id="action_room_avibility_wizard"/>-->
+		
+	<!--<menuitem action="action_room_avibility_wizard" 
+		id="menu_action_room_avibility_wizard" 
+		parent="menu_report_hotel_rental" />-->
+    
+		
+	</data>
+</openerp>

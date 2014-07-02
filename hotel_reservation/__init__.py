@@ -20,6 +20,7 @@
 #
 ##############################################################################
 from . import hotel_reservation
+from . import hotel_housekeeping
 from . import wizard
 from . import report
 
