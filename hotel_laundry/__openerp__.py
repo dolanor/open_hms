@@ -33,7 +33,7 @@
 
     Different reports are also provided, mainly for hotel statistics.
     """,
-    "depends" : ["base","hotel","hotel_management"],
+    "depends" : ["base","hotel","hotel_reservation"],
     "init_xml" : [
                   ],
     "demo_xml" : [
@@ -43,8 +43,8 @@
                     "hotel_laundry_view.xml",
                     "laundry_sequence_view.xml",
                     "laundry_data.xml",
-                    'security/hotel_laundry_security.xml',
-                    "security/ir.model.access.csv",
+#                    'security/hotel_laundry_security.xml',
+#                    "security/ir.model.access.csv",
                     ],
     "active": False,
     "installable": True
