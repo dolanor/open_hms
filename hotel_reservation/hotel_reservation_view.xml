@@ -379,6 +379,10 @@
 				<field name="state" position="replace">
 					<field name="state" widget="statusbar" statusbar_visible="draft,manual,progress,check_out" />
 				</field>
+				<button name="manual_invoice" states="manual" string="Create Invoice" position="after">
+					 <button name="action_checkout" states="progress" string="Checkout" type="object"/>  
+					 <button name="action_done" states="check_out" string="Done" type="object"/>
+				</button>
 			</field>
 		</record>
 	  

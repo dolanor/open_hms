@@ -31,6 +31,18 @@ class hotel_folio(osv.Model):
     _columns = {
         'reservation_id': fields.many2one('hotel.reservation', 'Reservation Id'),
     }
+    def action_checkout(self, cr, uid, ids, context={}):
+        self.write(cr,uid,ids,{'state':'check_out'})
+        return True
+    
+    def action_done(self, cr, uid, ids, context={}):
+        for line in self.browse(cr, uid, ids, context={}):
+            for invoice in line.invoice_ids:
+                if invoice.state != 'paid':
+                    raise osv.except_osv ('Error !','Invoice is not paid !')
+        self.write(cr,uid,ids,{'state':'done'})
+        return True
+
 
 class hotel_reservation(osv.Model):
     _name = "hotel.reservation"
