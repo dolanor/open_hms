@@ -387,4 +387,24 @@ class quick_room_reservation(osv.TransientModel):
                         }, context=context)
         return True
 
+class sale_order(osv.osv):
+    _inherit = "sale.order"
+    _decription = "Sale Order Inherit "
+    
+    _columns = {
+                'state': fields.selection([
+            ('draft', 'Quotation'),
+            ('waiting_date', 'Waiting Schedule'),
+            ('manual', 'To Invoice'),
+            ('progress', 'In Progress'),
+            ('check_out', 'CheckOut'),
+            ('shipping_except', 'Shipping Exception'),
+            ('invoice_except', 'Invoice Exception'),
+            ('done', 'Done'),
+            ('cancel', 'Cancelled')
+            ], 'Order State', readonly=True, select=True),
+                }
+    
+sale_order()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

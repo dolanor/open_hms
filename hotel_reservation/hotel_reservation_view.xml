@@ -370,6 +370,20 @@
 			</field>
 		</record>
 	  
+	  <record model="ir.ui.view" id="hotel_folio_form_inherit_state"> 
+			<field name="name">hotel.folio.inherit123</field>
+			<field name="type">form</field>
+			<field name="model">hotel.folio</field>
+			<field name="inherit_id" ref="hotel.view_hotel_folio1_form" />
+			<field name="arch" type="xml">
+				<field name="state" position="replace">
+					<field name="state" widget="statusbar" statusbar_visible="draft,manual,progress,check_out" />
+				</field>
+			</field>
+		</record>
+	  
+	  
+	  
 	</data>
 	
 </openerp>
