@@ -91,6 +91,8 @@ class hotel_room(osv.Model):
     _description = 'Hotel Room'
     _columns = {
         'product_id': fields.many2one('product.product', 'Product_id', required=True, ondelete='cascade'),
+        'ref_partner_id': fields.many2one('res.partner','Guest Name'),
+        'ref_folio_id': fields.many2one('hotel.folio','Folio Ref.'),
         'floor_id': fields.many2one('hotel.floor', 'Floor No', help='At which floor the room is located.'),
         'max_adult': fields.integer('Max Adult'),
         'max_child': fields.integer('Max Child'),
@@ -363,12 +365,22 @@ class hotel_folio_line(osv.Model):
         'checkout_date':_get_checkout_date,
     }
 
+# test model
     def create(self, cr, uid, vals, context=None, check=True):
         if 'folio_id' in vals:
             folio = self.pool.get("hotel.folio").browse(cr, uid, vals['folio_id'], context=context)
+# Room Obj
+            self.pool.get("product.product").write(cr,uid,vals['product_id'],{'state':'sellable'})
+            room_obj = self.pool.get("hotel.room").search(cr,uid,[('product_id','=',vals['product_id'])])
+            print "room_obj",room_obj
+            self.pool.get("hotel.room").write(cr,uid,room_obj[0],{'ref_partner_id':folio.partner_id.id,'ref_folio_id':folio.id})
+# -----
             vals.update({'order_id':folio.order_id.id})
         return super(osv.Model, self).create(cr, uid, vals, context)
 
+
+
+# End
     def unlink(self, cr, uid, ids, context=None):
         sale_line_obj = self.pool.get('sale.order.line')
         for line in self.browse(cr, uid, ids, context=context):
