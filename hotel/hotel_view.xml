@@ -274,6 +274,7 @@
 			<page string="Information">
                     <group colspan="4" col="4">
                        <field name="ref_partner_id"/>
+                       <field name="ref_folio_id"/>
                        <field name="floor_id" string = "Floor" />
                        <field name="categ_id" select="1" domain="[('isroomtype','=',True)]"/>
                        <field name="product_manager" select="2"/>
@@ -368,6 +369,7 @@
 		<field name="arch" type="xml">
 			<tree string="Hotel Room" >
 				<field name="name" />
+				<field name="ref_partner_id"/>
 				<field name="categ_id" select="1"/>
 				<field name="list_price" string="Room rate"/>
 				<field name="status"/>
