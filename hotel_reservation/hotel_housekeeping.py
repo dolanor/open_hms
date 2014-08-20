@@ -38,7 +38,7 @@ class rr_housekeeping(osv.osv):
                 'date':fields.datetime('Date Ordered', required=True,readonly=True,states={'draft':[('readonly',False)]}),
                 'activity': fields.selection([('repair','Repair'),('replaced','Replace')], 'Activity', select=True, required=True,readonly=True,states={'draft':[('readonly',False)]}),
                 'requested_by':fields.many2one('res.users','Requested By',readonly=True,states={'draft':[('readonly',False)]}),
-                'requested_by_partner':fields.many2one('res.partner','Requested By',readonly=True,states={'draft':[('readonly',False)]}),
+                'requested_by_partner':fields.many2one('res.partner','Guest Name',readonly=True,states={'draft':[('readonly',False)]}),
                 'source':fields.selection([('intern','Internal Observation'),('guest','Guest')], 'Source',required=True,readonly=True,states={'draft':[('readonly',False)]}),
                 'assign_to':fields.selection([('intern','Internal'),('third_party','Third Party')], 'Assign Method',required=True,readonly=True,states={'draft':[('readonly',False)],'confirmed':[('readonly',False)]}),
                 'assigned_third_party':fields.many2one('res.partner','Assigned To',readonly=True,states={'draft':[('readonly',False)],'confirmed':[('readonly',False)]}),
@@ -47,7 +47,8 @@ class rr_housekeeping(osv.osv):
                 'approved_by':fields.char('Approved By',size=20,),
                 'rr_line_ids':fields.one2many('rr.housekeeping.line','rr_line_id','Repair / Replacement Info',required=True,readonly=True,states={'draft':[('readonly',False)],'confirmed':[('readonly',False)]}),
                 'state': fields.selection([('draft','Draft'),('confirmed','Confirmed'),('assign','Assigned'),('done','Done'),('cancel','Cancel')], 'State', readonly=True,select=True),
-                'complaint':fields.char('Complaint',size=250,readonly=True,states={'draft':[('readonly',False)]}),                
+                'complaint':fields.char('Complaint',size=250,readonly=True,states={'draft':[('readonly',False)]}),  
+#                'shop_id':fields.many2one('sale.shop', 'Shop'),              
                 'shop_id':fields.many2one('sale.shop', 'Shop', required=True, readonly=True, states={'draft':[('readonly',False)]}),      
                 'company_id': fields.related('shop_id','company_id',type='many2one',relation='res.company',string='Company',store=True)       
                 
@@ -106,19 +107,19 @@ class rr_housekeeping(osv.osv):
             'state':'assign'
         })
         return True
-    
 
+# info source for house keeping
     def onchange_date_source(self, cr, uid, ids, date, source,sp_id):
         res={}
         if date and source and sp_id:
             if source == 'guest':
-                main_obj_ids = self.pool.get('hotel.room.booking.history').search(cr,uid,[('check_in','<=', date),('check_out','>=', date)])
+                main_obj_ids = self.pool.get('hotel.room.reservation.line').search(cr,uid,[('check_in','<=', date),('check_out','>=', date)])
                 print main_obj_ids,"main_obj_ids"
-                main_obj = self.pool.get('hotel.room.booking.history').browse(cr,uid,main_obj_ids)
+                main_obj = self.pool.get('hotel.room.reservation.line').browse(cr,uid,main_obj_ids)
                 new_ids = []
                 for dest_line in main_obj:
-                    if dest_line.history_id.product_id.shop_id.id == sp_id:
-                        new_ids.append(dest_line.history_id.id)
+                    if dest_line.room_id.product_id.shop_id.id == sp_id:
+                        new_ids.append(dest_line.room_id.id)
                 return {
                    'domain': {
                        'room_no': [('id', 'in', new_ids)],
@@ -130,12 +131,15 @@ class rr_housekeeping(osv.osv):
                        'room_no': [('id', 'in', new_ids)],
                    } }
         return {'value':res} 
+
+# ------------------------------    
+
         
     def onchange_room(self, cr, uid, ids, date_order, room_no):
         res={}
         today=date_order
         booking_id=0
-        history_obj=self.pool.get("hotel.room.booking.history")
+        history_obj=self.pool.get("hotel.room.reservation.line")
         folio_obj=self.pool.get("hotel.folio")
         if not room_no:
             return {'value':{'requested_by_partner': False}}

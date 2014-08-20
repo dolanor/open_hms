@@ -38,6 +38,7 @@
                             <field name="checkout" on_change="on_change_checkout(checkin,checkout)"/>
                             <field name="adults"/>
                             <field name="children"/>
+<!--                             <field name="number_of_rooms"/>   -->
                          </group>
                               <field name="dummy" invisible="True"/>
                     </group>
@@ -170,10 +171,12 @@
 		                                <field name="state"/>	
 		                                <field name="check_out"/>
 		                                <field name="reservation_id" />
+		                                <field name="partner_id"/>
 		                            </group>
                             	</form>
                             	<tree>
                             	    <field name="room_id"/>
+                            	    <field name="partner_id"/>
 	                                <field name="check_in"/>
 	                                <field name="check_out"/>
 	                                <field name="state"/>
@@ -184,6 +187,33 @@
                 </xpath>
             </field>
         </record>
+        
+        <record model="ir.ui.view" id="hotel_room_form_inherit_multicompany">
+			<field name="name">hotel.room.inherit.multicompany</field>
+			<field name="type">form</field>
+			<field name="model">hotel.room</field>
+			<field name="inherit_id" ref="hotel.view_hotel_room_form" />
+			<field name="arch" type="xml">
+				<field name="categ_id" position="after">
+					<field name="shop_id" required="1" on_change="on_change_shop_id(shop_id)"/>
+					<field name="company_id"/>
+				</field>
+			</field>
+		</record>
+        
+        <record model="ir.ui.view" id="view_hotel_room_tree_multicompany">
+			<field name="name">hotel.room.inherit.tree.multicompany</field>
+			<field name="type">tree</field>
+			<field name="model">hotel.room</field>
+			<field name="inherit_id" ref="hotel.view_hotel_room_tree" />
+			<field name="arch" type="xml">
+				<field name="list_price" position="after">
+					<field name="shop_id"/>
+					<field name="company_id"/>
+				</field>
+			</field>
+		</record>
+        
         
         <record model="ir.ui.view" id="view_hotel_folio1_form_inherited">
             <field name="name">hotel.folio.form.inherited</field>
@@ -275,100 +305,6 @@
 				  parent="menu_hotel_reservation"
 				  sequence="3"/>
 				  
-	  <!-- HOTEL ROOM BOOKING HISTORY -->
-	  <!-- history -->
-		
-		<record model="ir.ui.view" id="view_hotel_room_booking_history_form1">
-			<field name="name">hotel.room.booking.history.form</field>
-			<field name="model">hotel.room.booking.history</field>
-			<field name="type">form</field>
-			<field name="arch" type="xml">
-				<form string="Booking History">
-					<group colspan="6" col="4">
-						<field name="check_in"/>
-						<field name="check_out" />
-						<field name="partner_id" />
-						<field name="booking_id" />
-						<field name="category_id" />
-						<field name="history_id"/>
-						<field name="state" />
-					</group>
-				</form>
-			</field>
-		</record>
-		<record model="ir.ui.view" id="view_hotel_room_booking_history_tree1">
-			<field name="name">hotel.room.booking.history.tree</field>
-			<field name="model">hotel.room.booking.history</field>
-			<field name="type">tree</field>
-			<field name="arch" type="xml">
-				<tree string="Booking History" >
-					<field name="check_in"/>
-						<field name="check_out" />
-						<field name="partner_id" />
-						<field name="booking_id" />
-						<field name="category_id" />
-						<field name="history_id"/>
-						<field name="state" />
-				</tree>
-			</field>
-		</record>
-		
-		<record id="view_hotel_room_booking_history_search" model="ir.ui.view">
-            <field name="name">hotel.room.booking.history.search</field>
-            <field name="model">hotel.room.booking.history</field>
-            <field name="type">search</field>
-            <field name="arch" type="xml">
-                <search string="Search Booking History">
-                    <group>
-                        <separator orientation="vertical"/>
-                        <field name="check_in_date" filter_domain="[('check_in_date','&gt;=',self)]"/>
-                         <field name="check_out_date" filter_domain="[('check_out_date','&lt;=',self)]"/> 
-                        <field name="category_id"/>
-						<field name="history_id"/>
-						<separator orientation="vertical"/>
-                        <filter string="Check In" name="groupby_check_in" icon="terp-go-month" domain="[]" context="{'group_by':'check_in'}"/>
-                        <filter string="Check Out" name="groupby_check_out" icon="terp-go-month" domain="[]" context="{'group_by':'check_out'}"/>
-                    </group>
-                </search>
-            </field>
-        </record>
-		
-		<record model="ir.actions.act_window" id="action_hotel_room_booking_history_tree">
-			<field name="name">Booking History</field>
-			<field name="type">ir.actions.act_window</field>
-			<field name="res_model">hotel.room.booking.history</field>
-			<field name="view_mode">tree,form,gantt</field>
-		</record> 
-		
-		<record id="view_hotel_room_booking_history_gantt111" model="ir.ui.view">
-            <field name="name">hotel.room.booking.history.gantt</field>
-            <field name="model">hotel.room.booking.history</field>
-            <field name="type">gantt</field>
-            <field name="arch" type="xml">
-				<gantt date_start="check_in" date_stop="check_out" string="Booking Details" default_group_by="name">
-                </gantt>
-            </field>
-        </record>
-		
-		<menuitem name="Booking History"
-		          id="menu_hotel_room_booking_history_tree" 
-		          action="action_hotel_room_booking_history_tree"
-				  sequence="1"
-				  parent="menu_hotel_reservation"/>
-				  
-		<record model="ir.ui.view" id="hotel_room_form_inherit_rentalss">
-			<field name="name">hotel.room.inherit.rental</field>
-			<field name="type">form</field>
-			<field name="model">hotel.room</field>
-			<field name="inherit_id" ref="hotel.view_hotel_room_form" />
-			<field name="arch" type="xml">
-				<page string = "Descriptions" position="after">
-					<page string = "Booking History">
-						<field name="room_folio_ids" nolabel="1" readonly="1"/>
-					</page>
-				</page>	
-			</field>
-		</record>
 	  
 	  <record model="ir.ui.view" id="hotel_folio_form_inherit_state"> 
 			<field name="name">hotel.folio.inherit123</field>

@@ -32,7 +32,7 @@
       Different reports are also provided, mainly for hotel statistics.
     """,
     "website": "http://www.rimeta.com",
-    "depends" : ["hotel"],
+    "depends" : ["hotel","hotel_housekeeping"],
     "data" : [
         "security/ir.model.access.csv",
         "wizard/hotel_reservation_wizard.xml",

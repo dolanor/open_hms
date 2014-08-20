@@ -49,6 +49,16 @@ class hotel_reservation(osv.Model):
     _rec_name = "reservation_no"
     _description = "Reservation"
     _order = 'reservation_no desc'
+# ------------total room method    
+#    def count_total_rooms(self, cr, uid, ids, field_name, arg, context=None):
+#        res={}
+#        for obj in self.browse(cr,uid,ids):
+#            count1 = 0
+#            for line in obj.reservation_line:
+#                count1 += 1
+#            res[obj.id]=count1
+#        return res
+    
     _columns = {
         'reservation_no': fields.char('Reservation No', size=64, required=True, readonly=True),
         'date_order': fields.datetime('Date Ordered', required=True, readonly=True, states={'draft':[('readonly', False)]}),
@@ -66,7 +76,8 @@ class hotel_reservation(osv.Model):
         'state': fields.selection([('draft', 'Draft'), ('confirm', 'Confirm'), ('cancel', 'Cancel'), ('done', 'Done')], 'State', readonly=True),
         'folio_id': fields.many2many('hotel.folio', 'hotel_folio_reservation_rel', 'order_id', 'invoice_id', 'Folio'),
         'dummy': fields.datetime('Dummy'),
-#        'hotel_id': fields.many2one('hotel.hotel', required=True),
+# -----------       count total room
+#        'number_of_rooms':fields.function(count_total_rooms,method=True, type='integer',store=True,string="Number Of Rooms",size=30),
     }
     _defaults = {
         'reservation_no': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'hotel.reservation'),
@@ -121,6 +132,7 @@ class hotel_reservation(osv.Model):
                     for room_id in line_id:
                         vals = {
                             'room_id': room_id.id,
+                            'partner_id':reservation.partner_id.id,
                             'check_in': reservation.checkin,
                             'check_out': reservation.checkout,
                             'state': 'assigned',
@@ -180,44 +192,6 @@ class hotel_reservation(osv.Model):
             self.write(cr, uid, ids, {'state': 'done'}, context=context)
         return True
 
-# Room History, I hope it usefull
-class hotel_room(osv.osv):
-    _inherit = "hotel.room"
-    _decritpion = "room Inherit "
-    
-    _columns = {
-        
-        "room_folio_ids":fields.one2many("hotel.room.booking.history","history_id","Room Rental History"),
-#        'shop_id':fields.many2one('sale.shop', 'Shop',required=True),
-    }
-    
-    
-    def on_change_shop_id(self,cr, uid, ids, shop_id, context=None):
-        if not shop_id:
-            return {'value':{}}
-        temp=self.pool.get('sale.shop').browse(cr,uid,shop_id,context)
-        return {'value':{'company_id':temp.company_id.id}}
-    
-hotel_room()
-
-class hotel_room_booking_history(osv.osv):
-    _name = "hotel.room.booking.history"
-    _decritpion = "Hotel Room Booking History"
-    
-    _columns = {
-        "history_id":fields.many2one("hotel.room","Room No", readonly=True),
-        "name":fields.char('Product Name', size=128, readonly=True, required=True),
-        "category_id":fields.many2one("product.category","room category", readonly=True),
-        'check_in':fields.datetime('CheckIn Date',readonly=True),
-        'check_out':fields.datetime('CheckOut Date',readonly=True),
-        'check_in_date':fields.date('CheckIn Date',readonly=True),
-        'check_out_date':fields.date('CheckOut Date',readonly=True),
-        'partner_id':fields.many2one('res.partner',"Partner Name",readonly=True),
-        'booking_id':fields.many2one('hotel.reservation',"Booking Ref",readonly=True),
-        'state': fields.selection([('draft', 'Draft'),('confirm','Confirm'),('cancle','Cancel'),('done','Done')], 'State',readonly=True),
-    }
-hotel_room_booking_history()
-# End of Room History
 
 class hotel_reservation_line(osv.Model):
     _name = "hotel_reservation.line"
@@ -253,11 +227,12 @@ class hotel_room_reservation_line(osv.Model):
     _description = 'Hotel Room Reservation'
     _rec_name = 'room_id'
     _columns = {
-        'room_id': fields.many2one('hotel.room', 'Room id'),
+        'room_id': fields.many2one('hotel.room', 'Room No'),
         'check_in':fields.datetime('Check In Date', required=True),
         'check_out': fields.datetime('Check Out Date', required=True),
         'state': fields.selection([('assigned', 'Assigned'), ('unassigned', 'Unassigned')], 'Room Status'),
         'reservation_id': fields.many2one('hotel.reservation', 'Reservation'),
+        'partner_id':fields.many2one('res.partner',"Partner Name",readonly=True),
     }
 
 class hotel_room(osv.Model):
@@ -265,6 +240,7 @@ class hotel_room(osv.Model):
     _description = 'Hotel Room'
     _columns = {
         'room_reservation_line_ids': fields.one2many('hotel.room.reservation.line', 'room_id', 'Room Reservation Line'),
+        'shop_id':fields.many2one('sale.shop', 'Shop',required=True),
     }
 
     def cron_room_line(self, cr, uid, context=None):
@@ -282,6 +258,12 @@ class hotel_room(osv.Model):
                 status = {'status': 'available'}
             self.write(cr, uid, [room.id], status, context=context)
         return True
+    
+    def on_change_shop_id(self,cr, uid, ids, shop_id, context=None):
+        if not shop_id:
+            return {'value':{}}
+        temp=self.pool.get('sale.shop').browse(cr,uid,shop_id,context)
+        return {'value':{'company_id':temp.company_id.id}}
 
 class room_reservation_summary(osv.Model):
     _name = 'room.reservation.summary'
