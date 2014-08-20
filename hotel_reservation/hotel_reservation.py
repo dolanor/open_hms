@@ -401,4 +401,18 @@ class sale_order(osv.osv):
     
 sale_order()
 
+class product_product(osv.osv):
+    _inherit="product.product"
+    _columns = {
+        'shop_id':fields.many2one('sale.shop', 'Shop'),         
+    }
+    
+    def on_change_shop_id(self,cr, uid, ids, shop_id, context=None):
+        if not shop_id:
+            return {'value':{}}
+        temp=self.pool.get('sale.shop').browse(cr,uid,shop_id,context)
+        return {'value':{'company_id':temp.company_id.id}}
+    
+product_product()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
