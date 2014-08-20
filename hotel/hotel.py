@@ -85,7 +85,7 @@ class hotel_room_amenities(osv.Model):
         'iscategid': 1,
     }
 
-class hotel_room(osv.Model):
+class hotel_room(osv.osv):
     _name = 'hotel.room'
     _inherits = {'product.product': 'product_id'}
     _description = 'Hotel Room'
@@ -106,12 +106,22 @@ class hotel_room(osv.Model):
         'rental': 1,
         'status': 'available',
     }
-    
+
+# -- Def unlink    
+    def unlink(self, cr, uid, ids, context=None):
+        categ_ids = []
+        for categ in self.browse(cr, uid, ids, context=context):
+            categ_ids.append(categ.product_id.id)
+        return self.pool.get('product.product').unlink(cr, uid, categ_ids, context=context)
+# ---
+
     def set_room_status_occupied(self, cr, uid, ids, context=None):
         return self.write(cr, uid, ids, {'status': 'occupied'}, context=context)
 
     def set_room_status_available(self, cr, uid, ids, context=None):
         return self.write(cr, uid, ids, {'status': 'available'}, context=context)
+
+hotel_room()
 
 class room_rent(osv.Model):
     _name = 'room.rent'
