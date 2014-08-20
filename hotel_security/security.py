@@ -19,6 +19,7 @@ class security_note(osv.Model):
                 'category' : fields.selection([('routine','Routine'),
                                                ('case','Case')], string="Category"),
                 'note' : fields.text(string='Note'),
+                'user': fields.many2one('res.users', 'On Duty', select=True, readonly=True),
                 'state' : fields.selection([('draft','Draft'),
                                             ('confirm','Confirmed'),
                                             ('void', 'Void')], string="State"),
@@ -31,5 +32,6 @@ class security_note(osv.Model):
     _defaults = {
          'note_datetime' : fields.datetime.now,
          'security_note_id': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').get(cr, uid, 'hotel.security.note'),
+         'user': lambda obj, cr, uid, context: uid,
          'state': 'draft'
     }

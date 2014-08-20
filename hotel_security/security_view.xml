@@ -30,12 +30,21 @@
 						<field name="state" widget="statusbar" />
 					</header>
 					<sheet>
+					<notebook>
+					<page string="Security Note">
 						<group colspan="2" col="2">
 						<field name="security_note_id" />
 						<field name="note_datetime" />
 						<field name="category" />
 						<field name="note"/>
 						</group>
+					</page>
+					<page string="Misc">
+					<group>
+						<field name="user"/>
+					</group>
+					</page>
+					</notebook>
 					</sheet>
 				</form>
 			</field>
