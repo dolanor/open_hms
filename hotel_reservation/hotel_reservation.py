@@ -137,6 +137,7 @@ class hotel_reservation(osv.Model):
                             'check_out': reservation.checkout,
                             'state': 'assigned',
                             'reservation_id': reservation.id,
+                            'name':room_id.name,
                         }
                         reservation_line_obj.create(cr, uid, vals, context=context)
         return True
@@ -168,7 +169,8 @@ class hotel_reservation(osv.Model):
                 'checkout_date': reservation.checkout,
                 'duration': duration,
                 'reservation_id': reservation.id,
-                'service_lines': reservation['folio_id']
+                'service_lines': reservation['folio_id'],
+#                'name':room_id.name,
             }
             for line in reservation.reservation_line:
                 for r in line.reserve:
@@ -227,6 +229,7 @@ class hotel_room_reservation_line(osv.Model):
     _description = 'Hotel Room Reservation'
     _rec_name = 'room_id'
     _columns = {
+        'name': fields.char('Product Name', size=128, readonly=True, required=True),
         'room_id': fields.many2one('hotel.room', 'Room No'),
         'check_in':fields.datetime('Check In Date', required=True),
         'check_out': fields.datetime('Check Out Date', required=True),

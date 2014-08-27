@@ -43,6 +43,7 @@ class rr_housekeeping(osv.osv):
                 'assign_to':fields.selection([('intern','Internal'),('third_party','Third Party')], 'Assign Method',required=True,readonly=True,states={'draft':[('readonly',False)],'confirmed':[('readonly',False)]}),
                 'assigned_third_party':fields.many2one('res.partner','Assigned To',readonly=True,states={'draft':[('readonly',False)],'confirmed':[('readonly',False)]}),
                 'assigned_internal':fields.many2one('res.users','Assigned To',readonly=True,states={'draft':[('readonly',False)],'confirmed':[('readonly',False)]}),
+                'room_no':fields.many2one('hotel.room','Room No',size=64),
                 'room_no':fields.many2one('hotel.room','Room No',size=64,required=True,readonly=True,states={'draft':[('readonly',False)]}),
                 'approved_by':fields.char('Approved By',size=20,),
                 'rr_line_ids':fields.one2many('rr.housekeeping.line','rr_line_id','Repair / Replacement Info',required=True,readonly=True,states={'draft':[('readonly',False)],'confirmed':[('readonly',False)]}),
