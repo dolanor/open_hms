@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp>
+<data noupdate="1">
+	#
+	# Sequences for hotel.security
+	#
+
+	<record model="ir.sequence.type" id="seq_type_hotel_security">
+		<field name="name">Hotel Security Parking ID</field>
+		<field name="code">hotel.security.parking</field>
+	</record>
+	<record model="ir.sequence" id="seq_hotel_security">
+		<field name="name">Hotel Security Parking ID</field>
+		<field name="code">hotel.security.parking</field>
+		<field name="prefix">SecParking/</field>
+		<field name="padding">5</field>
+	</record>
+	
+</data>
+</openerp>

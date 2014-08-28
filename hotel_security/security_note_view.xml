@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!--  SECURITY NOTE -->
+		
+		<menuitem  id="menu_hotel_security" name="Security" parent="hotel.hotel_management_menu" sequence="50"/>
+		
+		<record model="ir.actions.act_window" id="security_note_list_action">
+			<field name="name">Security Note</field>
+			<field name="res_model">hotel.security.note</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem id="security_note_menu" name="Security Note"
+			action="security_note_list_action" parent="menu_hotel_security"/>
+			<!-- parent="hotel.hotel_management_menu" -->
+		
+		<!-- form view -->
+		<record model="ir.ui.view" id="security_note_form_view">
+			<field name="name">security_note.form</field>
+			<field name="model">hotel.security.note</field>
+			<field name="arch" type="xml">
+				<form string="Security Note Form" version="7.0">
+					<header>
+						<button name="signal_confirm" type="workflow" string="Confirm" states="draft" class="oe_highlight" icon="gtk-ok"/>
+						<button name="signal_void" type="workflow" string="Void" states="confirmed" class="oe_highlight" icon="gtk-cancel"/>
+						<!-- <button string="Set to Draft" name="action_set_to_draft" states="cancel" type="object" icon="gtk-file"/> -->
+						<field name="state" widget="statusbar" />
+						
+					</header>
+					<sheet>
+					<notebook>
+					<page string="Security Note">
+						<group colspan="2" col="2">
+						<field name="security_note_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+						<field name="note_datetime" attrs="{'readonly':[('state','!=','draft')]}"/>
+						<field name="category" attrs="{'readonly':[('state','!=','draft')]}"/>
+						<field name="note" attrs="{'readonly':[('state','!=','draft')]}"/>
+						</group>
+					</page>
+					<page string="Misc">
+					<group>
+						<field name="user"/>
+					</group>
+					</page>
+					</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+	
+		<!-- tree/list view -->
+		<record model="ir.ui.view" id="security_note_tree_view">
+			<field name="name">security_note.tree</field>
+			<field name="model">hotel.security.note</field>
+			<field name="arch" type="xml">
+				<tree string="Session Tree" colors="red:category=='case'">
+					<field name="security_note_id"/>
+					<field name="note_datetime"/>
+					<field name="category"/>
+					<field name="note"/>
+				</tree>
+			</field>
+		</record>
+
+		
+		<!-- kanban view 
+		<record model="ir.ui.view" id="view_openacad_session_kanban">
+			<field name="name">session.kanban</field>
+			<field name="model">openacademy.session</field>
+			<field name="arch" type="xml">
+				<kanban default_group_by="course_id">
+					<field name="color"/>
+					<templates>
+						<t t-name="kanban-box">
+							<div 
+								t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)}
+								oe_kanban_global_click_edit oe_semantic_html_override
+								oe_kanban_card #{record.group_fancy==1 ? 'oe_kanban_card_fancy' :
+								''}">
+								<div class="oe_dropdown_kanban">
+									<div class="oe_dropdown_toggle">
+										<span class="oe_e">#</span>
+										<ul class="oe_dropdown_menu">
+											<li><a type="delete">Delete</a></li>
+											<li><ul class="oe_kanban_colorpicker" 
+													data-field="color"/></li>
+										</ul>
+									</div>
+									<div class="oe_clear"></div>
+								</div>
+								<div t-attf-class="oe_kanban_content">
+									Session name: <field name="name"/><br />
+									Start date: <field name="start_date"/><br />
+									duration: <field name="duration"/>
+								</div>
+							</div>
+						</t>
+					</templates>
+				</kanban>
+			</field>
+		</record>-->
+		
+	</data>
+</openerp>
